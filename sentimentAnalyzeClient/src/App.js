@@ -42,15 +42,18 @@ class App extends React.Component {
     let url = ".";
     let mode = this.state.mode
     url = url+"/" + mode + "/sentiment?"+ mode + "="+document.getElementById("textinput").value;
+    console.log(url);
 
     fetch(url).then((response)=>{
         response.json().then((data)=>{
         this.setState({sentimentOutput:data.label});
         let output = data.label;
+        console.log(output);
         let color = "white"
         switch(output) {
-          case "positive": color = "black";break;
-          case "negative": color = "black";break;
+          case "positive": color = "green";break;
+          case "negative": color = "red";break;
+          case "neutral": color = "yellow"; break;
           default: color = "black";
         }
         output = <div style={{color:color,fontSize:20}}>{output}</div>
